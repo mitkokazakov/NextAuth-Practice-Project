@@ -20,9 +20,25 @@ export const authOptions: AuthOptions = {
                 password: { label: "Password", type: "password" }
             },
             async authorize(credentials){
-                const user = {id: 1, email: "testmail@yahoo.com"} 
-                return user;
+                const user = {id: "1", email: "testmail@yahoo.com"} 
+
+                if(user){
+
+                    return user;
+                }
+                else{
+                    return null;
+                }
             }
         })
-    ]
+    ],
+    secret: process.env.SECRET,
+    session: {
+        strategy: "jwt"
+    },
+    debug: process.env.NODE_ENV === "development"
 }
+
+const handler = NextAuth(authOptions);
+
+export {handler as GET, handler as POST}

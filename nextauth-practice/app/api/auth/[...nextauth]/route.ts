@@ -20,7 +20,7 @@ export const authOptions: AuthOptions = {
                 password: { label: "Password", type: "password" }
             },
             async authorize(credentials){
-                const user = {id: "1", email: "testmail@yahoo.com"} 
+                const user = {id: "1", email: "testmail@yahoo.com", name:"Mitko Kazakov"} 
 
                 if(user){
 

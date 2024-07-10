@@ -1,6 +1,39 @@
-import React from 'react'
+"use client"
+import React, { FormEvent } from 'react'
 
 const page = () => {
+
+  async function registerUser(e: FormEvent<HTMLFormElement>){
+    e.preventDefault();
+
+    const form = new FormData(e.currentTarget);
+
+    const name = form.get("name");
+    const email = form.get("email");
+    const password = form.get("password");
+
+    const resp = await fetch('/api/register',{
+      method: "POST",
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        password: password
+      })
+    });
+
+    console.log(resp);
+
+    if(resp.ok){
+      console.log("OK");
+      
+    }
+    else{
+      console.log("Something went wrong");
+      
+    }
+    
+  }
+
   return (
     <div>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -16,7 +49,7 @@ const page = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form action="#" method="POST" className="space-y-6">
+          <form onSubmit={registerUser} method="POST" className="space-y-6">
             <div>
               <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
                 Full Name

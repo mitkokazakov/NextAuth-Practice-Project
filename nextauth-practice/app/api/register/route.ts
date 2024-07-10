@@ -15,6 +15,10 @@ export async function POST(request: NextRequest) {
         return new NextResponse("Forbidden name", {status: 400});
     }
 
+    // if(name == "Mitko Kazakov"){
+    //     throw new Error("Forbidden name");
+    // }
+
     return NextResponse.json({name: name, email: email, password: password})
     
 }

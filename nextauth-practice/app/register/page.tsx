@@ -1,9 +1,14 @@
-"use client"
-import React, { FormEvent } from 'react'
+"use client";
+import axios, { AxiosError } from "axios";
+import React, { FormEvent } from "react";
+import { useRouter } from 'next/navigation'
 
 const page = () => {
 
-  async function registerUser(e: FormEvent<HTMLFormElement>){
+
+  const router = useRouter()
+
+  async function registerUser(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const form = new FormData(e.currentTarget);
@@ -12,26 +17,25 @@ const page = () => {
     const email = form.get("email");
     const password = form.get("password");
 
-    const resp = await fetch('/api/register',{
-      method: "POST",
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        password: password
-      })
-    });
+    try {
 
-    console.log(resp);
+      const resp = await axios.post("/api/register", {name: name, email: email, password: password});
 
-    if(resp.ok){
-      console.log("OK");
-      
+      console.log(resp);
+
+      if (resp.request.status === 200) {
+        console.log("OK");
+      } else {
+        console.log("Something went wrong");
+        console.log(resp.request.responseText);
+        
+      }
+
+
+    } catch (error: any) {
+      console.log(error.request.responseText);
+      router.push('/')
     }
-    else{
-      console.log("Something went wrong");
-      
-    }
-    
   }
 
   return (
@@ -51,7 +55,10 @@ const page = () => {
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form onSubmit={registerUser} method="POST" className="space-y-6">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
                 Full Name
               </label>
               <div className="mt-2">
@@ -66,7 +73,10 @@ const page = () => {
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
                 Email address
               </label>
               <div className="mt-2">
@@ -83,11 +93,17 @@ const page = () => {
 
             <div>
               <div className="flex items-center justify-between">
-                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
                   Password
                 </label>
                 <div className="text-sm">
-                  <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                  <a
+                    href="#"
+                    className="font-semibold text-indigo-600 hover:text-indigo-500"
+                  >
                     Forgot password?
                   </a>
                 </div>
@@ -115,16 +131,18 @@ const page = () => {
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-500">
-            Not a member?{' '}
-            <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+            Not a member?{" "}
+            <a
+              href="#"
+              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+            >
               Start a 14 day free trial
             </a>
           </p>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default page
-
+export default page;

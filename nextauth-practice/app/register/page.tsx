@@ -24,17 +24,23 @@ const page = () => {
       console.log(resp);
 
       if (resp.request.status === 200) {
+
         console.log("OK");
+        router.push('/api/auth/signin')
+        alert("Registration was successfuly")
+
       } else {
+
         console.log("Something went wrong");
         console.log(resp.request.responseText);
-        
+        alert(resp.request.responseText)
       }
 
 
     } catch (error: any) {
       console.log(error.request.responseText);
       router.push('/')
+      alert(error.request.responseText)
     }
   }
 

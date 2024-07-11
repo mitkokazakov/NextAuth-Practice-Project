@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/app/lib/prismadb";
 import bcrypt from 'bcryptjs'
-import { error } from "console";
 
 export async function POST(request: NextRequest) {
     
@@ -11,14 +10,30 @@ export async function POST(request: NextRequest) {
 
     console.log(name,email,password);
 
-    if(name == "Mitko Kazakov"){
-        return new NextResponse("Forbidden name", {status: 400});
+    if(!name || !email || !password){
+        return new NextResponse("You should fill in all fields", {status: 400});
     }
 
-    // if(name == "Mitko Kazakov"){
-    //     throw new Error("Forbidden name");
-    // }
+    const existingUser = await prisma.user.findFirst({
+        where:{
+            email: email
+        }
+    });
 
-    return NextResponse.json({name: name, email: email, password: password})
+    if(existingUser){
+        return new NextResponse("User with this email already exist!", {status: 400});
+    }
+
+    const hashedPassword = await bcrypt.hash(password,10);
+
+    const user = await prisma.user.create({
+        data: {
+          email: email,
+          name: name,
+          hashedPassword: hashedPassword
+        },
+      })
+
+    return NextResponse.json({user})
     
 }

@@ -11,7 +11,8 @@ const NavBar = () => {
 
       <div className="flex justify-center items-center gap-8">
         <Link href={"/register"}>Register</Link>
-        <Link href={"/api/auth/signin"}>Login</Link>
+        {/* <Link href={"/api/auth/signin"}>Login</Link> */}
+        <Link href={"/login"}>Login</Link>
         <div className=" bg-slate-200 h-12 w-12 rounded-full"></div>
       </div>
     </div>

@@ -1,10 +1,12 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import UserSession from "./components/UserSession";
+import { revalidatePath } from "next/cache";
 
 export default async function Home() {
 
   //server side retrieving session data
+  //revalidatePath("/");
   const session = await getServerSession(authOptions);
 
   return (

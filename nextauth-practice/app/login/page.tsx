@@ -130,7 +130,7 @@ const page = () => {
         </div>
 
         <div className="w-full flex justify-center items-center mt-5">
-          <button onClick={async () => await signIn('google')}>
+          <button onClick={async () => await signIn('google',{redirect: true, callbackUrl:"/"})}>
             <div className="flex justify-center items-center gap-3 border-slate-200 border-[1px] px-16 py-1 rounded-lg">
               <img
                 className="w-8 h-8"

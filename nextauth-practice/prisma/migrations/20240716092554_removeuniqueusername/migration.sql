@@ -2,8 +2,8 @@ BEGIN TRY
 
 BEGIN TRAN;
 
--- AlterTable
-ALTER TABLE [dbo].[User] ADD [hashedPassword] NVARCHAR(1000);
+-- DropIndex
+ALTER TABLE [dbo].[User] DROP CONSTRAINT [User_username_key];
 
 COMMIT TRAN;
 

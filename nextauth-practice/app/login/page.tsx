@@ -130,7 +130,7 @@ const page = () => {
         </div>
 
         <div className="w-full flex justify-center items-center mt-5">
-          <Link href={"/"}>
+          <button onClick={async () => await signIn('google')}>
             <div className="flex justify-center items-center gap-3 border-slate-200 border-[1px] px-16 py-1 rounded-lg">
               <img
                 className="w-8 h-8"
@@ -139,7 +139,7 @@ const page = () => {
               />
               <p>Google</p>
             </div>
-          </Link>
+          </button>
         </div>
 
         <p className="mt-10 text-center text-sm text-gray-500">

@@ -1,12 +1,25 @@
 "use client";
 import axios, { AxiosError } from "axios";
-import React, { FormEvent } from "react";
+import React, { FormEvent, useEffect } from "react";
 import { useRouter } from 'next/navigation'
+import { useSession } from "next-auth/react";
+
 
 const page = () => {
 
-
+  const { data: session, status } = useSession();
   const router = useRouter()
+
+  useEffect(() =>{
+
+    console.log(status);
+    
+
+    if(status == 'authenticated'){
+      router.push("/")
+      
+    }
+  },[])
 
   async function registerUser(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();

@@ -1,11 +1,24 @@
 "use client";
-import Link from "next/link";
-import React, { FormEvent } from "react";
-import { signIn } from "next-auth/react";
+import React, { FormEvent, useEffect } from "react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 const page = () => {
+
+  const {data: session, status} = useSession();
   const router = useRouter();
+
+  useEffect(() => {
+
+    console.log(session);
+
+    if (status === 'authenticated') {
+      router.push('/')
+    }
+    
+    
+  },[])
+  
 
   async function loggUser(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -19,20 +32,6 @@ const page = () => {
       email: email,
       password: password,
     };
-
-    
-      // const resp = await signIn("credentials", { ...data, redirect: true, callbackUrl:"/" });
-
-      // if (resp?.ok) {
-      //   //router.push("/");
-      //   alert("User logged in successful");
-      // }
-
-      // if(!resp?.ok){
-      //   alert(resp?.error)
-      //   return;
-      // }
-    
 
     signIn('credentials',{...data, redirect: true, callbackUrl:"/"}).then((callback) => {
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
-import UserInfo from "./UserInfo";
+import LogOut from "./LogOut";
 
 const NavBar = async () => {
 
@@ -27,6 +27,8 @@ const NavBar = async () => {
         {session == null ? <Link href={"/login"}>Login</Link> : null}
         
         {session != null ? <div className=" bg-slate-200 h-12 w-12 rounded-full flex items-center justify-center text-2xl font-bold">{firstLetter}</div> : null}
+
+        {session != null ? <LogOut /> : null}
       </div>
     </div>
   );

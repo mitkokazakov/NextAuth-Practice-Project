@@ -1,76 +1,40 @@
-//"use client";
-import React, { FormEvent, useEffect } from "react";
-import { signIn, useSession } from "next-auth/react";
-import { redirect, useRouter } from "next/navigation";
-import LoginForm from "../components/LoginForm";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+"use client"
+import { signIn } from 'next-auth/react';
+import React, { FormEvent } from 'react'
 
-const page = async () => {
+const LoginForm = () => {
 
-  const session = await getServerSession(authOptions)
 
-  if(session){
-    redirect("/");
-  }
-  // const {data: session, status} = useSession();
-  // const router = useRouter();
-
-  // useEffect(() => {
-
-  //   console.log(session);
-
-  //   if (status === 'authenticated') {
-  //     router.push('/')
-  //   }
+    async function loggUser(e: FormEvent<HTMLFormElement>) {
+        e.preventDefault();
     
+        const form = new FormData(e.currentTarget);
     
-  // },[])
-  
-
-  // async function loggUser(e: FormEvent<HTMLFormElement>) {
-  //   e.preventDefault();
-
-  //   const form = new FormData(e.currentTarget);
-
-  //   const email = form.get("email");
-  //   const password = form.get("password");
-
-  //   const data = {
-  //     email: email,
-  //     password: password,
-  //   };
-
-  //   signIn('credentials',{...data, redirect: true, callbackUrl:"/"}).then((callback) => {
-
-  //     if(callback?.error){
-  //       alert(callback.error)
-  //     }
-
-  //     if(callback?.ok){
-
-  //       //router.push("/");
-  //       alert("User logged in successful");
-  //     }
-  //   })
-
-  // }
-
+        const email = form.get("email");
+        const password = form.get("password");
+    
+        const data = {
+          email: email,
+          password: password,
+        };
+    
+        signIn('credentials',{...data, redirect: true, callbackUrl:"/"}).then((callback) => {
+    
+          if(callback?.error){
+            alert(callback.error)
+          }
+    
+          if(callback?.ok){
+    
+            //router.push("/");
+            alert("User logged in successful");
+          }
+        })
+    
+      }
+      
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img
-          alt="Your Company"
-          src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-          className="mx-auto h-10 w-auto"
-        />
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          Sign in to your account
-        </h2>
-      </div>
-
-      <LoginForm />
-      {/* <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form onSubmit={loggUser} className="space-y-6">
           <div>
             <label
@@ -159,9 +123,8 @@ const page = async () => {
             Start a 14 day free trial
           </a>
         </p>
-      </div> */}
-    </div>
-  );
-};
+      </div>
+  )
+}
 
-export default page;
+export default LoginForm

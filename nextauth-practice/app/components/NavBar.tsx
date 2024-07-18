@@ -4,6 +4,7 @@ import React from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import LogOut from "./LogOut";
+import { revalidatePath } from "next/cache";
 
 const NavBar = async () => {
 

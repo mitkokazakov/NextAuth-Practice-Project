@@ -1,9 +1,11 @@
 "use client"
 import { signIn } from 'next-auth/react';
 import React, { FormEvent } from 'react'
+import { useRouter } from 'next/navigation';
 
 const LoginForm = () => {
 
+  const router = useRouter();
 
     async function loggUser(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();

@@ -57,6 +57,10 @@ export const authOptions: AuthOptions = {
             }
         })
     ],
+    pages: {
+        
+        error: "/",
+      },
     secret: process.env.SECRET,
     session: {
         strategy: "jwt"

@@ -8,7 +8,11 @@ import { revalidatePath } from "next/cache";
 
 const NavBar = async () => {
 
+  
+
   const session = await getServerSession(authOptions);
+
+  
 
   const firstName = session?.user?.name?.split(" ")[0];
 

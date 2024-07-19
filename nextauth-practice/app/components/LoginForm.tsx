@@ -20,7 +20,7 @@ const LoginForm = () => {
           password: password,
         };
     
-        signIn('credentials',{...data, redirect: true, callbackUrl:"/"}).then((callback) => {
+        signIn('credentials',{...data, redirect: false, callbackUrl:"/"}).then((callback) => {
     
           if(callback?.error){
             alert(callback.error)
@@ -28,10 +28,29 @@ const LoginForm = () => {
     
           if(callback?.ok){
     
-            //router.push("/");
+            router.push("/");
+            router.refresh();
             alert("User logged in successful");
           }
         })
+
+        // const resp = await signIn('credentials',{...data, redirect: false});
+
+        // console.log(resp);
+
+        // if(resp?.ok){
+        //   router.push("/");
+        //   router.refresh();
+        //   alert("User has been logged successfully");
+        // }
+
+        // if(resp?.error){
+        //   console.log(resp.error);
+          
+        // }
+
+
+        
     
       }
       

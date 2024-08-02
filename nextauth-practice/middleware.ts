@@ -1,43 +1,36 @@
-import { getToken } from 'next-auth/jwt';
-import withAuth from 'next-auth/middleware';
+
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { authOptions } from './app/api/auth/[...nextauth]/route';
-import nextAuth from 'next-auth'; 
-import NextAuth from 'next-auth/next';
+
+const registeredUsersRoutes = ['/login', '/register'];
+
+const unregisteredUsersRoutes = ['/protected'];
 
 // This function can be marked `async` if using `await` inside
 export default async function middleware(request: NextRequest) {
 
-  
 
-  // const {auth} = NextAuth(authOptions)
+  const sessionToken = request.cookies.get("next-auth.session-token")?.value;
 
-  // const session = await auth();
+  const {pathname} = request.nextUrl;
 
-  // console.log(session);
+  if(registeredUsersRoutes.some((route) => pathname.startsWith(route)) && sessionToken){
 
-  const token = await getToken({req: request});
+    return NextResponse.redirect(new URL('/', request.url))
+  }
 
-  console.log(`midd --- ${request}`);
-  
+  if(unregisteredUsersRoutes.some((route) => pathname.startsWith(route)) && !sessionToken){
 
-  // const isAuth = !!token;
+    return NextResponse.redirect(new URL('/login', request.url))
+  }
 
-  // if(request.nextUrl.pathname.startsWith('/login') && isAuth){
+  // if(request.nextUrl.pathname.startsWith('/login' || '/register') && sessionToken){
+   
   //   return NextResponse.redirect(new URL('/', request.url))
   // }
-
-  // const authMiddleware = await withAuth({
-  //   pages: {
-  //     signIn: `/login`,
-  //   },
-  // });
-
-  return NextResponse.redirect(new URL('/', request.url))
 }
  
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ['/protected'],
+  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
 }

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import toast from "react-hot-toast";
 
 const LoginSchema = z.object({
   email: z.string().email(),
@@ -45,13 +46,15 @@ const LoginForm = () => {
       callbackUrl: "/",
     }).then((callback) => {
       if (callback?.error) {
-        alert(callback.error);
+        //alert(callback.error);
+        toast.error(callback.error)
       }
 
       if (callback?.ok) {
         router.push("/");
         router.refresh();
-        alert("User logged in successful");
+        //alert("User logged in successful");
+        toast.success("User logged in successful", {duration: 4000, style:{opacity: 0.1, backgroundColor: "green"}});
       }
     });
 

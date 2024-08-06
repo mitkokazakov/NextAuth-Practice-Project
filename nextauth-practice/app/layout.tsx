@@ -5,6 +5,8 @@ import "./globals.css";
 import AuthContext from "./context/AuthContext";
 import NavBar from "./components/NavBar";
 
+import { Toaster } from "react-hot-toast";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -24,6 +26,8 @@ export default function RootLayout({
           <NavBar />
           {children}
         </AuthContext>
+
+        <Toaster position="top-center" />
       </body>
     </html>
   );

@@ -83,7 +83,7 @@ export const authOptions: AuthOptions = {
       //     picture: dbUser.image,
       //     role: dbUser.role
       // }
-      console.log("JWT Callback", { token, user, session });
+      //console.log("JWT Callback", { token, user, session });
 
       return { ...token, ...user };
     },

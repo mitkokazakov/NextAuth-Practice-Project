@@ -54,7 +54,7 @@ const LoginForm = () => {
         router.push("/");
         router.refresh();
         //alert("User logged in successful");
-        toast.success("User logged in successful", {duration: 4000, style:{opacity: 0.1, backgroundColor: "green"}});
+        toast.success("User logged in successful", {duration: 4000, style:{ background: "rgba(76, 175, 80, 0.5)"}});
       }
     });
 

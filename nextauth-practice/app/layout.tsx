@@ -27,7 +27,7 @@ export default function RootLayout({
           {children}
         </AuthContext>
 
-        <Toaster position="top-center" />
+        <Toaster position="top-right" />
       </body>
     </html>
   );

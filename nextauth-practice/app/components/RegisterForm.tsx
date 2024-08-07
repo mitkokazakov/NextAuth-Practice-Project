@@ -5,6 +5,7 @@ import React, { FormEvent } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import toast from "react-hot-toast";
 
 type RegisterFormFields = {
   name: string;
@@ -50,16 +51,16 @@ const RegisterForm = () => {
       if (resp.request.status === 200) {
         console.log("OK");
         router.push("/login");
-        alert("Registration was successfuly");
+        toast.success("Registration was successfuly");
       } else {
         console.log("Something went wrong");
         console.log(resp.request.responseText);
-        alert(resp.request.responseText);
+        toast.error(resp.request.responseText);
       }
     } catch (error: any) {
       console.log(error?.request?.responseText);
       router.push("/");
-      alert(error.request.responseText);
+      toast.error(error.request.responseText);
     }
   };
 

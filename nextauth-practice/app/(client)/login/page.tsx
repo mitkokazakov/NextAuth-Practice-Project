@@ -2,9 +2,9 @@
 import React, { FormEvent, useEffect } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
-import LoginForm from "../components/LoginForm";
+import LoginForm from "../../components/LoginForm";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "../../api/auth/[...nextauth]/route";
 
 const page = async () => {
 

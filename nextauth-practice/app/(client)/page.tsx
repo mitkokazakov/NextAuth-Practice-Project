@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
-import UserSession from "./components/UserSession";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+import UserSession from "../components/UserSession";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 

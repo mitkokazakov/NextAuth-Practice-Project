@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-import AuthContext from "./context/AuthContext";
-import NavBar from "./components/NavBar";
+import AuthContext from "../context/AuthContext";
+import NavBar from "../components/NavBar";
 
 import { Toaster } from "react-hot-toast";
 

@@ -5,7 +5,7 @@ import { getToken } from "next-auth/jwt";
 
 const registeredUsersRoutes = ['/login', '/register'];
 
-const unregisteredUsersRoutes = ['/protected'];
+const unregisteredUsersRoutes = ['/protected','/dashboard'];
 
 // This function can be marked `async` if using `await` inside
 export default async function middleware(request: NextRequest) {

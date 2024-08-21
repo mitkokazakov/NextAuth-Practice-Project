@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios";
 import React, { FormEvent, useEffect } from "react";
 import { redirect, useRouter } from 'next/navigation'
 import { useSession } from "next-auth/react";
-import RegisterForm from "../components/RegisterForm";
+import RegisterForm from "../../components/RegisterForm";
 import { getServerSession } from "next-auth";
 
 
@@ -22,7 +22,7 @@ const page = async () => {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             alt="Your Company"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            src="https://tailwindui.com/img/logos/mark.svg?color=yellow&shade=400"
             className="mx-auto h-10 w-auto"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-widest text-gray-900">
